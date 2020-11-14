@@ -1,51 +1,92 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import { addBird, incrementBird } from '../../store/birds/birds';
-import './App.css';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
+let uname = 'jeena' 
+let pass = '1234'
+let Login = true
+let Home  = false
+import React from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  TextInput,
+  StatusBar,
+  TouchableOpacity,
+  Image
+} from 'react-native';
+import Page from './page'
+import {
+  Header,
+  LearnMoreLinks,
+  Colors,
+  DebugInstructions,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen';
 
-function App() {
-  const [birdName, setBird] = useState('');
-  const birds = useSelector(state => state.birds);
-  const dispatch = useDispatch();
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    dispatch(addBird(birdName))
-    setBird('');
-  };
-
+const App: () => React$Node = () => {
+  state= {
+    Home:false,
+    Login:true
+  }
   return (
-    <div className="wrapper">
-      <h1>Bird List</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <p>
-            Add Bird
-          </p>
-          <input
-            type="text"
-            onChange={e => setBird(e.target.value)}
-            value={birdName}
-          />
-        </label>
-        <div>
-          <button type="submit">Add</button>
-          <button type="submit">Sort</button>
-        </div>
-      </form>
-      <ul>
-        {birds.map(bird => (
-          <li key={bird.name}>
-            <h3>{bird.name}</h3>
-            <div>
-              Views: {bird.views}
-              <button onClick={() => dispatch(incrementBird(bird.name))}><span role="img" aria-label="add">➕</span></button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView style={{flex:1}}>
+        <Page />
+      </SafeAreaView>
+    </>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  scrollView: {
+    backgroundColor: Colors.lighter
+  },
+  engine: {
+    position: 'absolute',
+    right: 0,
+  },
+  buttonTextStyle: {
+    color: '#FFFFFF',
+    paddingVertical: 15,
+    fontSize: 16,
+  },
+  body: {
+    backgroundColor: Colors.white,
+  },
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: Colors.black,
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+    color: Colors.dark,
+  },
+  highlight: {
+    fontWeight: '700',
+  },
+  footer: {
+    color: Colors.dark,
+    fontSize: 12,
+    fontWeight: '600',
+    padding: 4,
+    paddingRight: 12,
+    textAlign: 'right',
+  },
+});
 
 export default App;
